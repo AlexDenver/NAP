@@ -38,6 +38,14 @@ MongoClient.connect(url, (err, client) => {
     app.listen(1090, () => {
         console.log('listening on 1090')
     })
+
+
+
+    db.collection('page').find({isHome:true}).toArray((er, arr) => {
+            if(!arr[0])
+            db.collection('page').insert({isHome: true});
+            // res.end(JSON.stringify(arr))
+        })
 })
 
 
@@ -83,11 +91,17 @@ app.get('/all', (req, res) => {
 })
 
 
-app.get('/page/', (req, res) => {
-    var cursor = db.collection('elements').find({
+app.get('/page', (req, res) => {
+    var cursor = db.collection('page').find({
         isHome: true
     }).toArray((er, arr) => {
-        res.end(JSON.stringify(arr));
+        pid = arr[0]._id;
+        var cursor = db.collection('elements').find({
+            "pid": pid
+        }).toArray((er, arr) => {
+            res.end(JSON.stringify(arr));
+        })
+        // res.end(JSON.stringify(arr));
     })
 })
 
@@ -115,7 +129,7 @@ app.post('/new', (req, res) => {
 app.get('/page/:id', (req, res) => {
 
     var cursor = db.collection('elements').find({
-        "pid": req.params.id
+        "pid": ObjectId(req.params.id)
     }).toArray((er, arr) => {
         res.end(JSON.stringify(arr));
     })
@@ -181,27 +195,59 @@ app.post('/update', (req, res) => {
 
 
 
-
 app.post("/edit", function(req, res){
     let t = req.body;
     if(t.type == "folder"){
         db.collection("elements").update({"_id": ObjectId(t.id)} , {$set: { "content.title": t.data} });        
-    }else if(t.type == "newfolder"){        
-        db.collection("pages").insert({}, function(err, data){
-            let udata = {type: 'folder', content: {title: t.title, target: data.ops[0]._id}, dim: {}, options: {}};
-            udata.pid = ObjectId(t.pid);
-            db.collection("elements").insert(udata, function(err, data){
-                res.status(200).end(JSON.stringify(data))
+    }else if(t.type == "newfolder"){    
+        if(!t.pageId || t.pageId == 'false'){
+            var cursor = db.collection('page').find({
+                isHome: true
+            }).toArray((er, arr) => {
+                pid = arr[0]._id;
+                t.pageId =  arr[0]._id;
+                db.collection("page").insert({}, function(err, data){
+                    let udata = {type: 'folder', content: {title: t.title, target: data.ops[0]._id}, dim: {}, options: {}};
+                    udata.pid = ObjectId(t.pageId);
+                    db.collection("elements").insert(udata, function(err, data){
+                        res.status(200).end(JSON.stringify(data))
+                    })
+                });  
             })
-        });                
+        }else{
+
+            db.collection("page").insert({}, function(err, data){
+                let udata = {type: 'folder', content: {title: t.title, target: data.ops[0]._id}, dim: {}, options: {}};
+                udata.pid = ObjectId(t.pid);
+                db.collection("elements").insert(udata, function(err, data){
+                    res.status(200).end(JSON.stringify(data))
+                })
+            });                
+        }    
     }else if(t.type == "delfolder"){
         db.collection("elements").remove({"_id": ObjectId(t.id)}); 
     }else if(t.type == "newnote"){
-        let udata = {content: {title: t.title, body: "Enter Text Here..."}, dim: {height: 100, width: 150}, options: {}};
-        udata.pid = ObjectId(t.pageId);
-        db.collection("elements").insert(udata, function(err, data){
-            res.status(200).end(JSON.stringify(data))
-        })
+        console.log(t);
+        if(!t.pageId || t.pageId == 'false'){
+            var cursor = db.collection('page').find({
+                isHome: true
+            }).toArray((er, arr) => {
+                pid = arr[0]._id;
+                t.pageId =  arr[0]._id;
+                let udata = {content: {title: t.title, body: "Enter Text Here..."}, dim: {height: 100, width: 150}, options: {}};
+                udata.pid = ObjectId(t.pageId);
+                db.collection("elements").insert(udata, function(err, data){
+                    res.status(200).end(JSON.stringify(data))
+                })
+            })
+        }else{
+
+            let udata = {content: {title: t.title, body: "Enter Text Here..."}, dim: {height: 100, width: 150}, options: {}};
+            udata.pid = ObjectId(t.pageId);
+            db.collection("elements").insert(udata, function(err, data){
+                res.status(200).end(JSON.stringify(data))
+            })
+        }
     }else if(t.type == "strip"){
         db.collection("elements").update({"_id": ObjectId(t.id)} , {$set: { "options.color": t.color} });        
     }else if(t.type == "contents"){

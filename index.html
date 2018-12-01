@@ -7,18 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>NAP</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.20/angular-ui-router.js"></script>
     <script src="./js/jquery-ui.js"></script>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+
 
 </head>
 
-<body  ng-app="nap">
+<body ng-app="nap">
     <header>
         <div class=" wrapper header">
             <a href="#!/">  <img src="./res/logo.png" height="25px" alt=""></a>
@@ -30,6 +32,49 @@
         </div>
     </header>
     <ui-view></ui-view>
+
+
+
+
+    <div data-folder=false class="note element template" data-id="temp123">
+        <div class="notewrap">
+            <div class="notehead">
+                <ul class="color">
+                    <li class="red"></li>
+                    <li class="blue"></li>
+                    <li class="yellow"></li>
+                    <li class="orange"></li>
+                    <li class="green"></li>
+                </ul>
+            </div>
+            <div class="content"><p></p>
+            </div>
+        </div>
+        <ul class="ops">
+            <li> <span class="fa fa-trash trash" ></span></li>
+            <li> <span class="fa fa-clone clone" ></span></li>
+        </ul>
+    </div>
+
+    <div data-folder=true class="folder element template" data-id="temp124">
+
+        <div>
+            <a href="#">
+                    <span class="fa fa-folder fa-3x"></span>
+                    <p class="title"></p>
+                </a>
+        </div>
+    </div>
+
+
+
+
+    <div>
+        <span class="fa fa-plus fa-2x add"></span>
+        <a class="add-new folderb" href="#"><span>Folder</span></a>
+        <a class="add-new noteb" href="#"><span>Note</span></a>
+    </div>
+
     <script src="./js/script.js"></script>
     <script src="./js/app.js"></script>
 </body>

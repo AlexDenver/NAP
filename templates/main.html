@@ -1,8 +1,8 @@
-<main class="main" ng-controller="main" id="main">
+<main class="main notes" ng-controller="main" id="main" data-pageid="{{pageid}}">
         <div class="element"  ng-repeat="element in elements" data-id={{element._id}} data-target={{element.content.target}} data-folder={{element.type=='folder'?true:false;}} style={{getStyle(element)}} ng-class="element.type=='folder'?'folder':'note'">
    
                 <div ng-if="element.type=='folder'" >
-                    <a href="?page={{element.content.target}}">
+                    <a href="/#!/page/{{element.content.target}}">
                         <span class="fa fa-folder fa-3x"></span>
                         <p class="title">{{element.content.title}}</p>
                     </a>

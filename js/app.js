@@ -3,9 +3,27 @@ angular.module('nap', ['ui.router'])
 .controller('main', ($scope, $http, $stateParams)=>{
     $scope.text = "Ready";
     // $scope.res = 0;
-    console.log($stateParams)
+    $scope.pageid = false;
+    if($stateParams.page)
+        $scope.pageid = $stateParams.page;
+    console.log("Here!")
     if($stateParams.page){
+        console.log("Here!")
         $http.get('http://127.0.0.1:1090/page/'+$stateParams.page)
+        .then((res)=>{
+            console.log(res)
+            $scope.elements = res.data;
+            console.log(res.data)
+        })
+        .then(()=>{
+            setTimeout(()=>{
+                elementsInit();
+    
+            }, 500)
+        })
+    }else{
+        console.log("Here")
+        $http.get('http://127.0.0.1:1090/page')
         .then((res)=>{
             console.log(res)
             $scope.elements = res.data;
@@ -28,12 +46,21 @@ angular.module('nap', ['ui.router'])
             
             return style;
     }
+    
+    
+    
+        
+    
 })  
 
 
 .config(($stateProvider)=>{
     $stateProvider.state('page', {
         url: '/page/:page',      
+        templateUrl: './templates/main.html',
+      })
+    $stateProvider.state('page_home', {
+        url: '/page',      
         templateUrl: './templates/main.html',
       })
     $stateProvider.state('signup', {

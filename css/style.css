@@ -146,3 +146,92 @@ body{
     padding: 25px 15px;
     background: #fff;
 }
+
+
+
+
+
+.fa.add, .fa.home{
+    position: fixed;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: 400ms;
+}
+
+.fa.add {
+    bottom: 20px;
+    right: 25px;
+    padding: 10px 12px;
+    background: #2196F3;
+    color: #fff;
+}
+
+.fa.home{
+    padding: 12px 10px;
+    background: #2196F3;
+    color: #fff;
+    top: 12px;
+    left: 10px;
+    position: absolute;
+}
+.folder {
+    overflow: hidden;
+    background: transparent;
+    border: none;
+    display: inline;
+    z-index: 999;
+}
+span.fa.add.open {
+    transform: rotate(405deg);
+    background: #1565C0;
+}
+a.add-new.folderb.open{
+    bottom: 130px;
+    right: 15px;
+}
+a.add-new.noteb.open{
+    bottom: 85px;
+    right: 20px;
+}
+a.add-new {
+    position: fixed;
+    right: 50px;
+    bottom: 35px;
+    z-index: -1;
+    transition: all 450ms;
+    opacity: 0;
+    font-weight: 900;
+    box-shadow: 0px 5px 8px 0px #1f1f1f21;
+}
+a.add-new span {
+    letter-spacing: -8px;
+    transition: all 450ms;
+}
+a.add-new.open{
+    z-index: 999;
+    background: #fff;
+    padding: 5px 15px;
+    font-style: italic;
+    color: #000;
+    opacity: 1;
+}
+a.add-new.open span{
+    letter-spacing: unset;
+    transition: all 450ms;
+}
+.folder p.title {
+    margin: 0;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    padding: 0;
+    font-weight: 300;
+}
+.folder a{
+    
+    text-decoration: none;
+}
+
+
+.element.template {
+    display: none;
+}

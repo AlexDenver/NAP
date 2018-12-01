@@ -162,7 +162,7 @@ function elementsInit() {
         }
 
         $.post("http://localhost:1090/edit", payload).then(function (data) {
-            let scope = getScope('notes');
+            let scope = getScope('main');
             if (payload.type == "clone") {
                 data = JSON.parse(data);
                 console.log(scope);
@@ -212,10 +212,11 @@ function elementsInit() {
     })
 
     $('.folderb').click(function (e) {
-        let scope = getScope('notes');
+        e.preventDefault();
+        let scope = getScope('main');
         let payload = {
             type: "newfolder",
-            pageId: scope.pageid,
+            pageId: $('main').data('pageid'),
             title: "New Folder"
         };
         $.post("http://localhost:1090/edit", payload).then(function (data) {
@@ -242,10 +243,11 @@ function elementsInit() {
     })
 
     $('.noteb').click(function (e) {
-        let scope = getScope('notes');
+        e.preventDefault();
+        let scope = getScope('main');
         let payload = {
             type: "newnote",
-            pageId: scope.pageid,
+            pageId: $('main').data('pageid'),
             title: "Enter Text Here"
         };
         $.post("http://localhost:1090/edit", payload).then(function (data) {
