@@ -1,0 +1,148 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.wrapper{
+    max-width: 1280px;
+    margin: auto;
+}
+header{
+    box-shadow: -7px -7px 0px 7px #fff, 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    height: 60px;
+}
+header .header{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    
+}
+
+
+header h3.title{
+    justify-self: center;
+}
+ul.nav {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: right;
+    grid-gap: 15px;
+}
+
+ul.nav a {
+    text-decoration: none;
+}
+
+ul.nav .signup a:hover {
+    color: green;
+}
+
+ul.nav .login a:hover {
+    color: blue;
+}
+
+
+
+
+main.main {
+    position: relative;
+    height: 100vh;
+}
+.other .handle{
+    background: #545454;
+    height: 2px;
+}
+.element.note {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+    box-shadow: -7px -7px 0px 7px #fff, 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    height: 200px;
+    width: 260px;
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+.card .title{
+    font-weight: bold;
+}
+.notehead{
+    height: 2px;
+}
+.edit .notehead{
+    height: auto    ;
+}
+.notehead.blue, .color .blue {
+    background: #2196F3;
+}
+
+.notehead.red, .color .red{
+    background: #ec1943;
+}
+
+.notehead.yellow, .color .yellow{
+    background: #FFEB3B;
+}
+.notehead.orange, .color .orange{
+    background: #ff5722;
+}
+.notehead.green, .color .green{
+    background: #009688;
+}
+
+
+ul.color li {
+    height: 15px;
+    width: 15px;
+    background: red;
+    border-radius: 100%;
+}
+ul.color {
+    display: grid;
+    grid-auto-flow: column;
+    list-style: none;
+    justify-content: space-evenly;
+    margin-left: 0;
+    padding-left: 0;
+}
+.element.edit .ops{
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: left;
+    list-style: none;
+}
+
+.notehead .color {
+    display: none;
+}
+
+.ops {
+    display: none;
+}
+
+.element.edit .color {
+    display: grid;
+}
+
+.element.edit .ops {
+    display: grid;
+}
+
+body{
+    position: relative;
+}
+.popup{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 25px 15px;
+    background: #fff;
+}

@@ -1,0 +1,43 @@
+<main class="main" ng-controller="main" id="main">
+        <div class="element"  ng-repeat="element in elements" data-id={{element._id}} data-target={{element.content.target}} data-folder={{element.type=='folder'?true:false;}} style={{getStyle(element)}} ng-class="element.type=='folder'?'folder':'note'">
+   
+                <div ng-if="element.type=='folder'" >
+                    <a href="?page={{element.content.target}}">
+                        <span class="fa fa-folder fa-3x"></span>
+                        <p class="title">{{element.content.title}}</p>
+                    </a>
+                </div>
+
+
+
+                <div ng-if="element.type!='folder'" class="notewrap">    
+                    <div class="notehead {{element.options.color}}">
+                        <ul class="color">
+                            <li class="red"></li>
+                            <li class="blue"></li>                        
+                            <li class="yellow"></li>                        
+                            <li class="orange"></li>                        
+                            <li class="green"></li>                        
+                        </ul>
+                    </div>
+                    <div class="content"><p>{{element.content.data}}</p></div>
+                </div>
+                
+                
+
+                <ul class="ops" ng-if="element.type!='folder'">
+                    <li> <span class="fa fa-trash trash"></span></li>
+                    <li> <span class="fa fa-clone clone" ></span></li>
+                </ul>
+                
+                
+
+                
+            </div>
+
+
+
+
+
+
+</main>

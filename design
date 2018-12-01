@@ -1,0 +1,24 @@
+page: {
+    _id: ,
+    name: ,
+    isHome: ,
+}
+
+
+element: {
+    _id: ,
+    type: ,
+    pid: ,
+    content: {
+        type: ,
+        data: ,
+        color: ,
+
+    }
+    dim: {
+        posx: ,
+        posy: ,
+        height: ,
+        width: ,
+    }
+}
