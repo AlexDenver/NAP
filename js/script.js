@@ -5,9 +5,46 @@ loadNap = () => {
     });
     window.addEventListener('drop', function (ev) {
         ev.preventDefault();
-        
+        datax = ev.dataTransfer.getData('text/html');
         console.log(ev.dataTransfer.getData('text/html'))
         console.log(ev.dataTransfer.files[0])
+
+
+        let payload = {
+            type: "newnote",
+            pageId: $('main').data('pageid'),
+            content: {
+                body: datax
+            }
+        };
+        $.post("http://localhost:1090/edit", payload).then(function (data) {
+            data = JSON.parse(data);
+            d = $($(".note.template[data-folder=false]")[0]);
+            jQuery(d).draggable("destroy");
+            let temp = $(".note[data-id='" + (d.data('id')) + "']").removeClass("ui-resizable edit").clone(true, true);
+            temp.attr('data-id', (data.ops[0])._id);
+            temp.find(".notehead").removeClass().addClass("notehead");
+            temp.find(".content p").text(datax);
+            $(".notes").append(temp);
+            let sel = $(".note[data-id='" + (data.ops[0])._id + "']");
+            $(sel).data('id', (data.ops[0])._id);
+            $(sel).removeClass('template');
+            $(sel).css({
+                top: "90px",
+                left: "10px",
+                width: "150px",
+                height: "100px"
+            });
+            $(sel[0]).find(".content p").focus();
+            newElementInit(sel[0]);
+            $(sel[0]).draggable(uiDragNoteOps);
+            makeEdits(sel[0]);
+            window.getSelection().selectAllChildren($(sel[0]).find(".content p")[0]);
+            jQuery(d).draggable(uiDragNoteOps);
+
+        })
+
+
     });
 
 
